@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const withLogin = (Component) => (props) => {
-    const [isLogin, setIsLogin] = useState(null);
-    useEffect(() => {
-      setIsLogin(localStorage.getItem("user"));
-    }, []);
+    const [isLogin, setIsLogin] = useState();
+    // useEffect(() => {
+    //   localStorage.getItem("user") ? setIsLogin(true) : setIsLogin(false);
+    // }, [isLogin]);
     const handleClickOn = () => {
         localStorage.setItem("user", "user");
+        setIsLogin(true);
     };
     const handleClickOut = () => {
     localStorage.removeItem("user");
+    setIsLogin(false);
   };
-  if (isLogin) {
     return (
         <Component
         {...props}
-        isAuth={true}
+        isAuth={isLogin}
         onLogin={handleClickOn}
         onLogOut={handleClickOut}
         />
     );
-  } else {
-    return (
-      <Component
-      {...props}
-      isAuth={false}
-      onLogOut={handleClickOut}
-      onLogin={handleClickOn}/>
-    );
-  }
 };
 
 export default withLogin;

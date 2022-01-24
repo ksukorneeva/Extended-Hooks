@@ -5,8 +5,8 @@ const SimpleComponent = ({ onLogin, onLogOut, isAuth }) => {
     return (
         <>
             {!isAuth
-            ? <button onClick={() => onLogin()}>Войти</button>
-            : <button onClick={() => onLogOut()}>Выйти из системы</button>}
+            ? <button className="btn btn-info" onClick={onLogin}>Войти</button>
+            : <button className="btn btn-info" onClick={onLogOut}>Выйти из системы</button>}
         </>
     );
 };
